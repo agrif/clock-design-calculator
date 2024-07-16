@@ -252,7 +252,7 @@ let Calculator = function() {
             if (this.gain_margin() >= 5) {
                 return [true, "This margin is at least 5, indicating $g_m \\gg g_{m\\_crit}$ and stable operation."];
             } else {
-                return [false, "This margin is below 5! $g_m$ is not much larger than $g_{m\\_crit} and this oscillator may not be stable."];
+                return [false, "This margin is below 5! $g_m$ is not much larger than $g_{m\\_crit}$ and this oscillator may not be stable."];
             }
         }, this),
     });
