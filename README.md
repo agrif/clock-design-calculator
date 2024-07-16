@@ -1,6 +1,8 @@
 Clock Design Calculator
 =======================
 
+[Use it online via GitHub Pages.](https://agrif.github.io/clock-design-calculator/)
+
 A simple tool to help make sure your crystal will work with your STM32
 (and other processors). Based on:
 
