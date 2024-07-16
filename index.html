@@ -31,12 +31,12 @@
     <p>This calculator was written to help LEDs blink faster. If you are instead designing a pacemaker or ICBM, consider using a different tool.</p>
 
     <script type="text/html" id="field-default">
-      <td><input data-bind="value: value"/></td>
+      <td><input data-bind="value: value" type="number"/></td>
       <td data-bind="text: unit"></td>
     </script>
 
     <script type="text/html" id="field-base-mul">
-      <td><input data-bind="value: base"/></td>
+      <td><input data-bind="value: base" type="number"/></td>
       <td><select data-bind="value: mul, options: units, optionsText: 'name', optionsValue: 'mul'"></select></td>
     </script>
 
