@@ -1,0 +1,120 @@
+body {
+    margin: 3em;
+    font-family: sans-serif;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.column, .smallcolumn {
+    flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+    .column {
+        flex: 2;
+    }
+
+    .smallcolumn {
+        flex: 1;
+    }
+}
+
+img.circuit {
+    width: 100%;
+    min-width: 200px;
+}
+
+.info::before {
+    content: "ⓘ";
+    font-size: 1.2em;
+    padding-left: 5px;
+}
+
+.info {
+    position: relative;
+}
+
+.info .infotext {
+    visibility: hidden;
+    text-align: justify;
+    max-width: 20em;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 1em;
+    position: absolute;
+    right: 0;
+    left: -20em;
+    z-index: 1;
+}
+
+.info .infosymbol {
+    float: right;
+}
+
+.info:hover .infotext {
+    visibility: visible;
+}
+
+.parameters, .results {
+    width: auto;
+}
+
+.parameters input {
+    text-align: right;
+    width: 5em;
+    margin-left: 1em;
+}
+
+.parameters th {
+    text-align: right;
+    padding-right: 1em;
+}
+
+tr.header > th {
+    font-size: 1.5em;
+    padding: 0.5em 0;
+    text-align: left;
+}
+
+tr.subheader > th {
+    font-size: 1.2em;
+    padding: 0.3em 0;
+    text-align: left;
+}
+
+tr.subheader > th, tr.subheader > td {
+    padding-top: 1em;
+}
+
+tr.resultrow > th, tr.resultrow > td {
+    padding-top: 0.5em;
+}
+
+.results .symbol {
+    text-align: right;
+}
+
+.note-valid, .note-invalid {
+    margin-top: 0.5em;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    font-style: italic;
+    text-align: justify;
+}
+
+.note-valid {
+    border-color: #44cc44;
+    background-color: #aaccaa;
+}
+
+.note-invalid {
+    border-color: #cc4444;
+    background-color: #ccaaaa;
+}

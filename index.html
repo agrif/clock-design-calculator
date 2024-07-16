@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clock Design Calculator</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script type="text/javascript" src="vendor/knockout.js"></script>
+    <script type="text/javascript">
+      MathJax = {
+          tex: {
+              inlineMath: [['$', '$'], ['\\(', '\\)']],
+          },
+          chtml: {
+              fontURL: 'vendor/mathjax/fonts',
+          },
+          svg: {
+              fontCache: 'global',
+          },
+      };
+    </script>
+    <script type="text/javascript" src="vendor/mathjax/tex-chtml.js"></script>
+    <script type="text/javascript" src="calculator.js"></script>
+  </head>
+
+  <body>
+    <h1>Clock Design Calculator</h1>
+
+    <p>Based on <a href="https://hoani.net/posts/blog/2017-01-19-oscillator-design/">this blog post by Hoani Bryson</a> and ST Microelectronics <a href="https://www.st.com/resource/en/application_note/an2867-guidelines-for-oscillator-design-on-stm8afals-and-stm32-mcusmpus-stmicroelectronics.pdf">AN2867</a>.</p>
+
+    <p>This calculator was written to help LEDs blink faster. If you are instead designing a pacemaker or ICBM, consider using a different tool.</p>
+
+    <script type="text/html" id="field-default">
+      <td><input data-bind="value: value"/></td>
+      <td data-bind="text: unit"></td>
+    </script>
+
+    <script type="text/html" id="field-base-mul">
+      <td><input data-bind="value: base"/></td>
+      <td><select data-bind="value: mul, options: units, optionsText: 'name', optionsValue: 'mul'"></select></td>
+    </script>
+
+    <script type="text/html" id="tooltip-contents">
+                <div class="info">
+            <div class="infotext">
+              <strong data-bind="text: name"></strong>
+              <span class="infosymbol" data-bind="latex: symbol"></span>
+              <hr>
+              <span data-bind="latex: tooltip"></span>
+            </div>
+          </div>
+    </script>
+
+    <script type="text/html" id="result-group">
+      <tr class="header"><th colspan="4" data-bind="text: name"></th></tr>
+      <!-- ko foreach: results -->
+      <tr class="subheader">
+        <th colspan="3" data-bind="text: name"></th>
+        <td data-bind="if: tooltip"><div data-bind="template: 'tooltip-contents'"></div></td>
+      </tr>
+      <tr>
+        <td class="symbol" data-bind="latex: symbol"></td>
+        <td data-bind="latex: relation"></td>
+        <td data-bind="latex: equation"></td>
+        <td></td>
+      </tr>
+      <tr class="resultrow">
+        <td></td>
+        <td data-bind="latex: relation"></td>
+        <td data-bind="text: value_pretty"></td>
+        <td></td>
+      </tr>
+      <tr class="note">
+        <td colspan="4" data-bind="if: check">
+          <div data-bind="class: valid() ? 'note-valid' : 'note-invalid', latex: note"></div>
+        </td>
+      </tr>
+      <!-- /ko -->
+    </script>
+
+    <script type="text/html" id="parameter-group">
+      <tr class="header"><th colspan="5" data-bind="text: name"></th></tr>
+      <!-- ko foreach: parameters -->
+      <tr>
+        <th data-bind="text: name"></th>
+        <td data-bind="latex: symbol"></td>
+        <!-- ko template: template --><!-- /ko -->
+        <td data-bind="if: tooltip"><div data-bind="template: 'tooltip-contents'"></div></td>
+      </tr>
+      <!-- /ko -->
+    </script>
+            
+    <div class="row">
+      <div class="column">
+        <table class="parameters">
+          <!-- ko template: {'name': 'parameter-group', 'foreach': parameter_groups } --><!-- /ko -->
+        </table>
+      </div>
+
+      <div class="column">
+        <table class="results">
+          <!-- ko template: {'name': 'result-group', 'foreach': result_groups } --><!-- /ko -->
+        </table>
+      </div>
+
+      <div class="smallcolumn">
+        <img src="circuit.svg" class="circuit">
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+      ko.applyBindings(new Calculator());
+    </script>
+  </body>
+</html>
